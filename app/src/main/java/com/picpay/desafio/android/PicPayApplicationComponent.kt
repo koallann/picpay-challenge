@@ -3,13 +3,23 @@ package com.picpay.desafio.android
 import com.picpay.desafio.android.user.di.UserComponent
 import dagger.Component
 import dagger.Module
+import javax.inject.Singleton
 
-@Module(subcomponents = [UserComponent::class])
+@Module(
+    subcomponents = [
+        UserComponent::class,
+    ]
+)
 class PicPaySubcomponentModule
 
-@Component(modules = [PicPaySubcomponentModule::class])
+@Singleton
+@Component(
+    modules = [
+        PicPaySubcomponentModule::class,
+    ]
+)
 interface PicPayApplicationComponent {
-    fun userComponent(): UserComponent.Factory
+    val userComponent: UserComponent.Factory
 }
 
 interface ApplicationComponent {

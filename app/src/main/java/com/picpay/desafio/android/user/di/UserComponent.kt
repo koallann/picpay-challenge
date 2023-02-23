@@ -1,9 +1,17 @@
 package com.picpay.desafio.android.user.di
 
+import com.picpay.desafio.android.common.di.ActivityScope
+import com.picpay.desafio.android.common.di.ViewModelFactoryModule
 import com.picpay.desafio.android.user.MainActivity
 import dagger.Subcomponent
 
-@Subcomponent(modules = [UserNetworkModule::class])
+@ActivityScope
+@Subcomponent(
+    modules = [
+        ViewModelFactoryModule::class,
+        UserModule::class,
+    ]
+)
 interface UserComponent {
     @Subcomponent.Factory
     interface Factory {
