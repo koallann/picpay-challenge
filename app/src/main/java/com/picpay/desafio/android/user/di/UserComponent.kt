@@ -1,6 +1,6 @@
 package com.picpay.desafio.android.user.di
 
-import com.picpay.desafio.android.MainActivity
+import com.picpay.desafio.android.user.MainActivity
 import dagger.Subcomponent
 
 @Subcomponent(modules = [UserNetworkModule::class])
