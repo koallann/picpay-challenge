@@ -1,7 +1,7 @@
 package com.picpay.desafio.android.user.di
 
 import com.picpay.desafio.android.common.di.ActivityScope
-import com.picpay.desafio.android.common.di.ViewModelFactoryModule
+import com.picpay.desafio.android.common.viewmodel.ViewModelFactoryModule
 import com.picpay.desafio.android.user.MainActivity
 import dagger.Subcomponent
 

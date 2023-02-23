@@ -1,7 +1,7 @@
 package com.picpay.desafio.android.user.di
 
 import com.picpay.desafio.android.user.PICPAY_SERVICE_BASE_URL
-import com.picpay.desafio.android.user.data.PicPayService
+import com.picpay.desafio.android.user.data.remote.PicPayService
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -15,7 +15,10 @@ class UserNetworkModule {
     @Provides
     fun provideOkHttpClient(): OkHttpClient =
         OkHttpClient.Builder()
-            .addInterceptor(HttpLoggingInterceptor())
+            .addInterceptor(
+                HttpLoggingInterceptor()
+                    .setLevel(HttpLoggingInterceptor.Level.BODY)
+            )
             .build()
 
     @Provides

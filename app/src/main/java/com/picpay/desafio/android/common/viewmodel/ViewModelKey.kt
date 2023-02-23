@@ -1,4 +1,4 @@
-package com.picpay.desafio.android.common.di
+package com.picpay.desafio.android.common.viewmodel
 
 import androidx.lifecycle.ViewModel
 import dagger.MapKey
