@@ -5,6 +5,9 @@ import android.app.Application
 class PicPayApplication : Application(), ApplicationComponent {
 
     override val appComponent: PicPayApplicationComponent =
-        DaggerPicPayApplicationComponent.create()
+        DaggerPicPayApplicationComponent
+            .builder()
+            .application(this)
+            .build()
 
 }
