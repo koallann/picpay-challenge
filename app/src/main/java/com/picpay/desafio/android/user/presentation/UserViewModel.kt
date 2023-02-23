@@ -1,12 +1,12 @@
 package com.picpay.desafio.android.user.presentation
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.picpay.desafio.android.user.data.UserRepository
 import com.picpay.desafio.android.user.domain.User
+import com.picpay.desafio.android.user.domain.UserUseCase
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -15,7 +15,7 @@ sealed class UserViewModelEvent {
 }
 
 class UserViewModel @Inject constructor(
-    private val repository: UserRepository,
+    private val useCase: UserUseCase,
 ) : ViewModel() {
 
     // TODO: emit once
@@ -26,10 +26,17 @@ class UserViewModel @Inject constructor(
     val users: LiveData<List<User>> = _users
 
     fun onLoadUsers() = viewModelScope.launch {
-        repository.getUsers().fold(
+        useCase.loadUsers().fold(
             { _users.value = it },
-            { _event.value = UserViewModelEvent.ErrorLoadingUsers }
+            {
+                Log.d(TAG, ":: onLoadUsers :: onFailure - ${it.localizedMessage}")
+                _event.value = UserViewModelEvent.ErrorLoadingUsers
+            }
         )
+    }
+
+    companion object {
+        private const val TAG = "UserViewModel"
     }
 
 }

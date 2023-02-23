@@ -1,6 +1,7 @@
 package com.picpay.desafio.android.user
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
@@ -8,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.picpay.desafio.android.ApplicationComponent
 import com.picpay.desafio.android.R
-import com.picpay.desafio.android.common.di.ViewModelFactory
+import com.picpay.desafio.android.common.viewmodel.ViewModelFactory
 import com.picpay.desafio.android.databinding.ActivityMainBinding
 import com.picpay.desafio.android.user.di.UserComponent
 import com.picpay.desafio.android.user.presentation.UserListAdapter
@@ -45,13 +46,16 @@ class MainActivity : AppCompatActivity() {
         observeViewModel()
 
         // load users on first activity instance
-        if (savedInstanceState == null) viewModel.onLoadUsers()
+        if (savedInstanceState == null) {
+            binding.progressBar.isVisible = true
+            viewModel.onLoadUsers()
+        }
     }
 
     private fun setupView() {
         binding.recyclerView.also {
             it.layoutManager = LinearLayoutManager(this)
-            it.adapter = UserListAdapter()
+            it.adapter = adapter
         }
     }
 
