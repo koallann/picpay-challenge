@@ -4,7 +4,7 @@ import com.picpay.desafio.android.user.di.UserComponent
 import dagger.Component
 import dagger.Module
 
-@Module(subcomponents = [])
+@Module(subcomponents = [UserComponent::class])
 class PicPaySubcomponentModule
 
 @Component(modules = [PicPaySubcomponentModule::class])
