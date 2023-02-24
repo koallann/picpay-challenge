@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.hadilq.liveevent.LiveEvent
 import com.picpay.desafio.android.user.domain.User
 import com.picpay.desafio.android.user.domain.UserUseCase
 import kotlinx.coroutines.launch
@@ -17,8 +18,7 @@ class UserViewModel @Inject constructor(
     private val useCase: UserUseCase,
 ) : ViewModel() {
 
-    // TODO: emit once
-    private val _event: MutableLiveData<UserViewModelEvent> = MutableLiveData()
+    private val _event: LiveEvent<UserViewModelEvent> = LiveEvent()
     val event: LiveData<UserViewModelEvent> = _event
 
     private val _users: MutableLiveData<List<User>> = MutableLiveData()
@@ -27,8 +27,8 @@ class UserViewModel @Inject constructor(
     fun onLoadUsers() {
         viewModelScope.launch {
             useCase.loadUsers().fold(
-                { _users.postValue(it) },
-                { _event.postValue(UserViewModelEvent.ErrorLoadingUsers) }
+                { _users.value = it },
+                { _event.value = UserViewModelEvent.ErrorLoadingUsers }
             )
         }
     }
