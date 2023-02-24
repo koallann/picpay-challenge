@@ -1,7 +1,9 @@
 package com.picpay.desafio.android.presentation
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.lifecycle.Observer
 import com.picpay.desafio.android.UserFakeData
+import com.picpay.desafio.android.user.domain.User
 import com.picpay.desafio.android.user.domain.UserUseCase
 import com.picpay.desafio.android.user.presentation.UserViewModel
 import com.picpay.desafio.android.user.presentation.UserViewModelEvent
@@ -11,7 +13,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestRule
 import org.mockito.Mock
-import org.mockito.Mockito.`when`
+import org.mockito.Mockito.*
 import org.mockito.MockitoAnnotations
 
 class UserViewModelTest {
@@ -25,12 +27,20 @@ class UserViewModelTest {
     @Mock
     private lateinit var useCase: UserUseCase
 
+    @Mock
+    private lateinit var usersObserver: Observer<List<User>>
+
+    @Mock
+    private lateinit var eventObserver: Observer<UserViewModelEvent>
+
     private lateinit var viewModel: UserViewModel
 
     @Before
     fun setup() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         viewModel = UserViewModel(useCase)
+        viewModel.users.observeForever(usersObserver)
+        viewModel.event.observeForever(eventObserver)
     }
 
     @Test
@@ -39,8 +49,8 @@ class UserViewModelTest {
 
         viewModel.onLoadUsers()
 
-        assert(viewModel.users.value == UserFakeData.domainUsers)
-        assert(viewModel.event.value !is UserViewModelEvent.ErrorLoadingUsers)
+        verify(usersObserver).onChanged(UserFakeData.domainUsers)
+        verify(eventObserver, never()).onChanged(any())
     }
 
     @Test
@@ -49,8 +59,8 @@ class UserViewModelTest {
 
         viewModel.onLoadUsers()
 
-        assert(viewModel.event.value is UserViewModelEvent.ErrorLoadingUsers)
-        assert(viewModel.users.value == null)
+        verify(eventObserver).onChanged(UserViewModelEvent.ErrorLoadingUsers)
+        verify(usersObserver, never()).onChanged(anyList())
     }
 
 }

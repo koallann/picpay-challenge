@@ -21,7 +21,7 @@ class UserUseCaseTest {
 
     @Before
     fun setup() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         useCase = UserUseCase(repository)
     }
 
