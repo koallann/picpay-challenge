@@ -27,15 +27,9 @@ class UserRepository @Inject constructor(
     }
 
     private suspend fun getFromRemote(): Result<List<User>> {
-        val response = service.getUsers()
-        val users = response.body()
-
-        return if (response.isSuccessful && users != null) {
-            cacheRemoteResult(users)
-            Result.success(users.toDomain())
-        } else {
-            Result.failure(Exception(response.message()))
-        }
+        val users = service.getUsers()
+        cacheRemoteResult(users)
+        return Result.success(users.toDomain())
     }
 
     private suspend fun getFromLocal(): Result<List<User>> {

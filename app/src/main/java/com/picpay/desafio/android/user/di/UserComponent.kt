@@ -2,7 +2,7 @@ package com.picpay.desafio.android.user.di
 
 import com.picpay.desafio.android.common.di.ActivityScope
 import com.picpay.desafio.android.common.viewmodel.ViewModelFactoryModule
-import com.picpay.desafio.android.user.MainActivity
+import com.picpay.desafio.android.user.presentation.UserActivity
 import dagger.Subcomponent
 
 @ActivityScope
@@ -18,5 +18,5 @@ interface UserComponent {
         fun create(): UserComponent
     }
 
-    fun inject(activity: MainActivity)
+    fun inject(activity: UserActivity)
 }

@@ -1,7 +1,6 @@
-package com.picpay.desafio.android.user
+package com.picpay.desafio.android.user.presentation
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
@@ -12,12 +11,10 @@ import com.picpay.desafio.android.R
 import com.picpay.desafio.android.common.viewmodel.ViewModelFactory
 import com.picpay.desafio.android.databinding.ActivityMainBinding
 import com.picpay.desafio.android.user.di.UserComponent
-import com.picpay.desafio.android.user.presentation.UserListAdapter
-import com.picpay.desafio.android.user.presentation.UserViewModel
-import com.picpay.desafio.android.user.presentation.UserViewModelEvent
+import com.picpay.desafio.android.user.presentation.ui.UserListAdapter
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity() {
+class UserActivity : AppCompatActivity() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
