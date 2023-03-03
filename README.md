@@ -23,7 +23,7 @@ Ps.: Fique à vontade para editar o projeto inteiro, organização de pastas e m
 
 ## Minha entrevista
 
-Antes da entrevista técnica com perguntas e apresentação do desafio, listei alguns tópicos que considero importantes para a carreira de um engenheiro de software e que poderia servir de script pra mim... Quase todos eles foram abordados durante o papo:
+Antes da entrevista técnica com perguntas e apresentação do desafio, listei alguns tópicos que considero importantes para a carreira de um engenheiro de software e que poderia também servir de script para mim... Quase todos eles foram abordados durante o papo:
 
 ```
 1. Project structure
